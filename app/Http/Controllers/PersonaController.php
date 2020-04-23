@@ -89,6 +89,27 @@ class PersonaController extends Controller
       }
    }
 
+   public function update($id,$nombre,$edad){
+      try{
+         $Persona = Persona::find($id);
+         
+              $Persona->nombre = $nombre;
+              $Persona->edad = $edad;
+              $Persona->save();
+              
+              if (empty($Persona)){
+                  $arr = array('nombre'=>'error');
+                  echo json_encode($arr);
+              } else {
+                  echo $Persona;
+              }
+      } catch(\Illuminate\Database\QueryException $e){
+          $errorCore = $e->getMessage();
+          $arr = array('estado' => $errorCore);
+          echo json_encode($arr);
+      }
+   }
+
    // Funcion para eliminar que recibe el ID
    public function eliminar($id){
       try{
