@@ -88,15 +88,22 @@ class PersonaController extends Controller
           echo json_encode($arr);
       }
    }
-
+         
+   //Funcion para modificar nombre y edad
    public function update($id,$nombre,$edad){
       try{
          $Persona = Persona::find($id);
-         
+         // Busca un registro a través de su ID
+         // y lo almacena en una varibale
               $Persona->nombre = $nombre;
               $Persona->edad = $edad;
               $Persona->save();
+              // Realiza el reemplazo del dato guardado
+              // en los atributos por el valor que 
+              // estamos pasandole en los parámetros 
               
+              // Verificamos que el registro no esté
+              // vacío, es decir, exista.
               if (empty($Persona)){
                   $arr = array('nombre'=>'error');
                   echo json_encode($arr);
@@ -112,6 +119,7 @@ class PersonaController extends Controller
 
    // Funcion para eliminar que recibe el ID
    public function eliminar($id){
+      
       try{
          // Se realiza la consulta y se almacena el resultado en una variable
          $Persona = DB::delete('delete from persona where idPersona = ?', [$id]);
