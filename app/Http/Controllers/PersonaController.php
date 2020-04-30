@@ -105,10 +105,11 @@ class PersonaController extends Controller
               // Verificamos que el registro no esté
               // vacío, es decir, exista.
               if (empty($Persona)){
-                  $arr = array('nombre'=>'error');
+                  $arr = array('resultado'=>'error');
                   echo json_encode($arr);
               } else {
-                  echo $Persona;
+               $arr = array('resultado'=>'actualizado');
+               echo json_encode($arr);
               }
       } catch(\Illuminate\Database\QueryException $e){
           $errorCore = $e->getMessage();
@@ -126,10 +127,11 @@ class PersonaController extends Controller
 
          //Si no se obtuvo resultado imprime mensaje
          if (empty($Persona)){
-            $arr = array(''=>'No se pudo eliminar');
+            $arr = array('resultado'=>'No se pudo eliminar');
             echo json_encode($arr);
         } else {
-            echo json_encode($Persona);
+         $arr = array('resultado'=>'eliminado');
+         echo json_encode($arr);
          }
       } catch(\Illuminate\Database\QueryException $e){
           $errorCore = $e->getMessage();
